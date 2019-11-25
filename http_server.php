@@ -13,15 +13,15 @@ $process = new Swoole\Process(function (Swoole\Process $process) {
     ]);
 
     $server->on('workerStart',function () use ($process, $server) {
-        $server->pool = new RedisPool(64);
+        //$server->pool = new RedisPool(64);
         $process->write(1);
     });
 
     $server->on('request',function (Request $request, Response $response) use ($server) {
         try {
-            $redis = $server->pool->get();
-//            $redis = new Redis();
-//            $redis->connect('127.0.0.1',6379);
+            //$redis = $server->pool->get();
+            $redis = new Redis();
+            $redis->connect('127.0.0.1',6379);
             $greater = $redis->get('greater');
             if (!$greater) {
                 throw new RedisException('got data failed');
