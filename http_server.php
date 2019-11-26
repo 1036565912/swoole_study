@@ -82,5 +82,5 @@ if ($process->start()) {
     });
 
     $process->read(1);
-    System('ab -c 2560 -n 100000 -k http://127.0.0.1:9501/ 2>&1');
+    System('ab -c 256 -n 100000 -k http://127.0.0.1:9501/ 2>&1');
 }
